@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>따릉이 리뷰 사이트</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+    <div class="container">
+        <h1>따릉이 리뷰 🚲</h1>
+
+        <div id="main-page">
+            <h2>따릉이 번호 검색</h2>
+            <input type="text" id="search-input" placeholder="따릉이 번호 5자리 입력 (예: 12345)" />
+            <button id="search-btn">🔍 검색</button>
+            <hr />
+            <button id="go-to-review-btn">✨ 리뷰 달기</button>
+        </div>
+
+        <div id="review-page">
+            <h2>새 리뷰 작성</h2>
+            <form id="review-form">
+                
+                <div class="form-group">
+                    <label for="bike-number">따릉이 번호 (필수)</label>
+                    <input type="text" id="bike-number" required placeholder="리뷰를 작성할 따릉이 번호 입력" />
+                </div>
+                
+                <!-- 개별 항목별 별점: 페달링, 브레이크, 타이어 -->
+                <div class="form-group">
+                    <label>페달링 상태 (별점)</label>
+                    <div class="rating" id="pedal-rating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <input type="hidden" id="pedal-rating-value" value="0" />
+                    <div class="small-muted">페달의 부드러움 / 물리적 소음 등</div>
+                </div>
+
+                <div class="form-group">
+                    <label>브레이크 상태 (별점)</label>
+                    <div class="rating" id="brake-rating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <input type="hidden" id="brake-rating-value" value="0" />
+                    <div class="small-muted">제동력, 반응성</div>
+                </div>
+
+                <div class="form-group">
+                    <label>타이어 상태 (별점)</label>
+                    <div class="rating" id="tire-rating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <input type="hidden" id="tire-rating-value" value="0" />
+                    <div class="small-muted">마모, 공기압 여부</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="review-text">상세 평가 내용</label>
+                    <textarea id="review-text" placeholder="따릉이의 주행 상태, 브레이크, 청결도 등에 대한 자세한 평가를 남겨주세요." required></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" id="go-to-main-btn" class="cancel-btn">👈 홈으로 돌아가기</button>
+                    <button type="submit" id="review-submit-btn">✅ 리뷰 제출하기</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
