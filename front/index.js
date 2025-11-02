@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const goBackToMainBtn = document.getElementById('go-to-main-btn');
     const reviewForm = document.getElementById('review-form');
     const searchBtn = document.getElementById('search-btn');
-
+    const bikeNumberInput = document.getElementById('bikeNumberInput');
 
 
     // 범용 별점 컴포넌트 초기화 함수
@@ -104,9 +104,36 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        alert(`[리뷰 제출 완료 (UI 확인)]\n\n- 따릉이 번호: ${bikeNumber}\n- 페달링: ${pedalRating}점\n- 브레이크: ${brakeRating}점\n- 타이어: ${tireRating}점\n- 리뷰 내용: ${reviewText.substring(0, 60)}...\n\n실제 데이터 저장을 위해서는 백엔드 서버가 필요합니다.`);
+        create
+
+        alert(`[리뷰 제출 완료 (UI 확인)]\n\n- 따릉이 번호: ${bikeNumber}\n- 페달링: ${pedalRating}점\n- 브레이크: ${brakeRating}점\n- 타이어: ${tireRating}점\n- 리뷰 내용: ${reviewText.substring(0, 60)}...\n\n`);
 
         // 제출 후 메인 페이지로 복귀 (폼 내용 초기화 및 화면 전환)
         goToMainPage();
+    });
+
+    // 특정 따릉이 번호로 리뷰 검색
+    async function searchBikeReviews(bikeNumber) {
+        const response = await fetch(`/api/reviews/${bikeNumber}`);
+        if (response.status === 404) {
+            alert("리뷰가 없습니다. 새로운 리뷰를 등록해주세요.");
+            window.location.href = "/review-form.html"; // 리뷰 등록 페이지로 이동
+        } else if (response.ok) {
+            const reviews = await response.json();
+            // 리뷰 페이지로 이동하며 데이터를 전달
+            window.location.href = `/reviews.html?bikeNumber=${bikeNumber}`;
+        } else {
+            alert("오류가 발생했습니다. 다시 시도해주세요.");
+        }
+    }
+
+    // 검색 버튼 클릭 이벤트
+    searchBtn.addEventListener("click", () => {
+        const bikeNumber = bikeNumberInput;
+        if (bikeNumber) {
+            searchBikeReviews(bikeNumber);
+        } else {
+            alert("따릉이 번호를 입력해주세요.");
+        }
     });
 });
